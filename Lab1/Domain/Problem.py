@@ -9,10 +9,10 @@ class Problem:
 
     def __init__(self, fileName):
         self.__fileName = fileName
-        self.__initialConfig = self.readFromFile()
+        self.__initialConfig = self.__readFromFile()
         self.__initialState = State()
         self.__initialState.setValues([self.__initialConfig])
-        self.__finalConfig = self.generateFinalConfig(self.__initialConfig.getSize())
+        self.__finalConfig = self.__generateFinalConfig(self.__initialConfig.getSize())
 
     def getInitial(self):
         return self.__initialState
@@ -20,11 +20,9 @@ class Problem:
     def getFinal(self):
         return self.__finalConfig
 
-    def generateFinalConfig(self, size):
+    def __generateFinalConfig(self, size):
         l = [[str(x + y * size) for x in range(size)] for y in range(size)]
         l[0][0] = '*'
-        for i in l:
-            print(i)
         return Configuration(l, 0, 0)
 
     """
@@ -61,7 +59,7 @@ class Problem:
         out: tuple of form (int,int)
     """
 
-    def findEmptySpace(self, initialState):
+    def __findEmptySpace(self, initialState):
         n = len(initialState[0])
         for i in range(n):
             for j in range(n):
@@ -73,14 +71,14 @@ class Problem:
         out: Configuration based on the file given through fileName
     """
 
-    def readFromFile(self):
+    def __readFromFile(self):
         state = []
         try:
             with open(self.__fileName) as f:
                 for line in f:
                     line.strip()
                     state.append(line.split())
-            x, y = self.findEmptySpace(state)
+            x, y = self.__findEmptySpace(state)
             return Configuration(state, x, y)
         except IOError:
             raise Exception("File is missing")

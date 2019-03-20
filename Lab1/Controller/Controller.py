@@ -17,10 +17,10 @@ class Controller:
 
         queue = [root]
         while len(queue) > 0:
-            currentState = q.pop(0)
+            currentState = queue.pop(0)
             if currentState.getValues()[-1] == self.__problem.getFinal():
                 return currentState
-            q = q + self.__problem.expand(currentState)
+            queue = queue + self.__problem.expand(currentState)
 
     """
         Returns a solution found through greedy breadth first search algorithm - informed search
