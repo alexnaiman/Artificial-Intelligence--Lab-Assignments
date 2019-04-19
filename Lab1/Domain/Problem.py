@@ -40,7 +40,7 @@ class Problem:
             for j in range(length):
                 if state.getValues()[-1].getBoard()[i][j] != '*':
                     difference += abs(i - int(int(state.getValues()[-1].getBoard()[i][j]) / length)) + abs(
-                        j - int(state.getValues()[-1].getBoard()[i][j]) % 3)
+                        j - int(state.getValues()[-1].getBoard()[i][j]) % length)
         return difference
 
     """
